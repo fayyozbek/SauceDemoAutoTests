@@ -1,0 +1,11 @@
+{
+  "base_url": "https://www.saucedemo.com",
+  "browsers": {
+    "chrome": {
+      "arguments": ["--start-maximized", "--disable-infobars"]
+    },
+    "firefox": {
+      "arguments": ["--start-maximized"]
+    }
+  }
+}
