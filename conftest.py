@@ -3,6 +3,7 @@ import allure
 import pytest
 from utilities.configuration import Configuration
 import logging.config
+
 def pytest_addoption(parser):
     parser.addoption(
         "--browser",

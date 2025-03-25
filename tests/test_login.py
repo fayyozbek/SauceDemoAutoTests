@@ -1,22 +1,26 @@
-import allure
 import logging
-from pages.login_page import LoginPage
+
+import allure
+
+from steps.login_steps import LoginSteps
 
 logger = logging.getLogger(__name__)
 
-@allure.epic("Авторизация пользователя")
-@allure.feature("Вход на сайт")
-@allure.story("Успешная авторизация")
-@allure.severity(allure.severity_level.CRITICAL)
-def test_login(browser, config):
-    with allure.step("Открываем страницу авторизации"):
-        login_page = LoginPage(browser, config.get_base_url())
-        login_page.open()
 
-    with allure.step("Вводим логин и пароль"):
-        login_page.login("standard_user", "secret_sauce")
+@allure.story("Login functionality")
+@allure.description("Test the login functionality with 'standard_user'")
+def test_login_valid(browser):
+    with allure.step("Starting login test for 'standard_user'."):
+        logger.info("Starting login test for 'standard_user'.")
+        LoginSteps(browser).login_as("standard_user", "secret_sauce")
+        assert "inventory" in browser.current_url
+        logger.info("Login test for 'standard_user' completed successfully.")
 
-    with allure.step("Проверяем, что вход успешный"):
-        assert login_page.is_logged_in()
 
-    logger.info('Тест авторизации завершен успешно.')
+@allure.story("Login functionality")
+@allure.title("Test the login functionality with wrong credentials")
+def test_login_invalid(browser):
+    with allure.step("Starting login test for 'standard_user'."):
+        logger.info("Starting login test for 'standard_user'.")
+        LoginSteps(browser).login_as("standard_user", "wrong_password")
+        assert LoginSteps(browser).is_error_message(), "Error message not displayed as expected."

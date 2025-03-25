@@ -2,7 +2,17 @@
   "base_url": "https://www.saucedemo.com",
   "browsers": {
     "chrome": {
-      "arguments": ["--start-maximized", "--disable-infobars"]
+      "arguments": [
+        "--start-maximized",
+        "--disable-infobars",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "headless",
+        "window-size=1920,1080",
+        "start-maximized",
+        "--disable-extensions"
+      ]
     },
     "firefox": {
       "arguments": ["--start-maximized"]
